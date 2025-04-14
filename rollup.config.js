@@ -7,6 +7,12 @@ import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
+import alias from '@rollup/plugin-alias';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -40,6 +46,14 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		alias({
+			entries: [
+				{
+					find: '~',
+					replacement: path.resolve(__dirname, 'src/'), // __dirmname: 해당 파일의 경로, "해당 파일의 경로/src"에 해당하는 경로를 ~로 alias
+				}
+			]
+		}),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
