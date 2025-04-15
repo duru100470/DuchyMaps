@@ -4,8 +4,6 @@
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
   "compilerOptions": {
     "strict": true,
-    "importsNotUsedAsValues": "remove",
-    "preserveValueImports": false,
     "baseUrl": "./",
 		"paths": {
         	"~/*": ["src/*"],

@@ -1,38 +1,39 @@
 <script lang="ts">
-  import "~/global.css";
-  interface Props {
-    name: string;
-  }
+  import Header from "~/components/Header.svelte";
+  import SideBar from "~/components/SideBar.svelte";
+  import Router, { location } from "svelte-spa-router";
+  import { routes, authRoutes } from "~/routes";
+  import Toasts from "~/components/Toasts.svelte";
 
-  let { name }: Props = $props();
+  // Redirect to login page
+  // $: if (authRoutes[$location]) {
+  //   if (userInfoStore.current == null) document.location.href = "/#/auth/login";
+  // }
 </script>
 
+<Toasts />
+
+<Header />
 <main>
-  <h1>Hello {name}!</h1>
-  <p>
-    Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-    how to build Svelte apps.
-  </p>
+  <SideBar />
+  <div class="content">
+    <Router {routes} />
+  </div>
 </main>
 
 <style>
   main {
+    width: 100%;
     text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
   }
 
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
+  .content {
+    width: 100%;
+    height: 100%;
+    margin-left: 300px;
+    margin-top: 60px;
   }
 </style>
